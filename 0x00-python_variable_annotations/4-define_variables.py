@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+"""variable annotationa"""
 
 a: int = 1
 pi: float = 3.14
