@@ -1,8 +1,9 @@
 #!/usr/bin/env python3
 """Test Suite for utils.py
 """
-from utils import access_nested_map
+from utils import access_nested_map, get_json
 import unittest
+from unittest.mock import patch, Mock
 from parameterized import parameterized
 
 
@@ -27,3 +28,22 @@ class TestAccessNestedMap(unittest.TestCase):
         """Test exceptions --KeyError"""
         with self.assertRaises(Exception):
             access_nested_map(map, path)
+
+
+class TestGetJson(unittest.TestCase):
+    """Class for testing get_json method """
+    @parameterized.expand([
+        ("http://example.com", {"payload": True}),
+        ("http://holberton.io", {"payload": False})
+    ])
+    def test_get_json(self, turl, test_payload):
+        """Test output  of get_json against payload
+        and test whether mocked get method was called once
+        (per input) with test_url as an argv
+        """
+        mock_resp = Mock()
+        mock_resp.json.return_val = test_payload
+        with patch('requests.get', return_val=mock_resp):
+            result = get_json(turl)
+            self.assertEqual(result, test_payload)
+            mock_resp.json.assert_called_once()
