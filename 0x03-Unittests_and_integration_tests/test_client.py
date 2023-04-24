@@ -2,13 +2,13 @@
 """Test suite for client.py
 """
 import unittest
-from unittest.mock import patch
+from mock import patch
+import client
 from client import GithubOrgClient
 from parameterized import parameterized
 
-
 class TestGithubOrgClient(unittest.TestCase):
-    """ """
+    """Class for testing client module"""
 
     @parameterized.expand([
         ('google', {"google": True}),
@@ -20,5 +20,5 @@ class TestGithubOrgClient(unittest.TestCase):
         """
         patcher.return_value.expected
         result = GithubOrgClient(org)
-        self.assertEqual(result, expected)
-        patcher.assert_called_once_with("https://api.github.com/orgs/" + org)
+        self.assertEqual(result,expected)
+        patcher.assert_called_once_with("https://api.github.com/orgs/"+org)
