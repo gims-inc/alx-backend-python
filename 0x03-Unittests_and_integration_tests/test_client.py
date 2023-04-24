@@ -5,6 +5,7 @@ import unittest
 from mock import patch
 import client
 from client import GithubOrgClient
+from utils import *
 from parameterized import parameterized
 
 
