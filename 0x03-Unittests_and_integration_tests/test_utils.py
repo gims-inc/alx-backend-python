@@ -3,6 +3,7 @@
 """
 from utils import access_nested_map, get_json
 import unittest
+from typing import Dict
 from unittest.mock import patch, Mock
 from parameterized import parameterized
 
@@ -37,7 +38,7 @@ class TestGetJson(unittest.TestCase):
         ("http://example.com", {"payload": True}),
         ("http://holberton.io", {"payload": False})
     ])
-    @patch('requests.get')
+    @patch('utils.requests')
     def test_get_json(self, turl, expected_json, mock_requests):
         """Test output  of get_json against payload
         and test whether mocked get method was called once
