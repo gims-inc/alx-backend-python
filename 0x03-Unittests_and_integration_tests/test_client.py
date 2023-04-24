@@ -2,11 +2,11 @@
 """Test suite for client.py
 """
 import unittest
-from mock import patch
+from unittest.mock import patch, Mock, MagicMock
 import client
 from client import GithubOrgClient
-from utils import *
 from parameterized import parameterized
+from typing import Dict
 
 
 class TestGithubOrgClient(unittest.TestCase):
@@ -17,7 +17,7 @@ class TestGithubOrgClient(unittest.TestCase):
         ("abc", {"abc": True})
     ])
     @patch('client.get_json')
-    def test_org(self, org, expected, patcher):
+    def test_org(self, org: str, expected: Dict, patcher: MagicMock) -> None:
         """tests that GithubOrgClient.org returns the correct value.
         """
         patcher.return_value.expected
