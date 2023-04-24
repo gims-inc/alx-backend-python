@@ -37,7 +37,7 @@ class TestGetJson(unittest.TestCase):
         ("http://example.com", {"payload": True}),
         ("http://holberton.io", {"payload": False})
     ])
-    @patch('get_json.requests')
+    @patch('utils.requests')
     def test_get_json(self, turl, expected_json, mock_requests):
         """Test output  of get_json against payload
         and test whether mocked get method was called once
