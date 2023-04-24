@@ -7,12 +7,13 @@ import client
 from client import GithubOrgClient
 from parameterized import parameterized
 
+
 class TestGithubOrgClient(unittest.TestCase):
     """Class for testing client module"""
 
     @parameterized.expand([
-        ('google', {"google": True}),
-        ('abc', {"abc": True})
+        ("google", {"google": True}),
+        ("abc", {"abc": True})
     ])
     @patch('client.get_json')
     def test_org(self, org, expected, patcher):
@@ -20,5 +21,5 @@ class TestGithubOrgClient(unittest.TestCase):
         """
         patcher.return_value.expected
         result = GithubOrgClient(org)
-        self.assertEqual(result,expected)
+        self.assertEqual(result.org, expected)
         patcher.assert_called_once_with("https://api.github.com/orgs/"+org)
